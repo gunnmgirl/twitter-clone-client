@@ -1,12 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { Users, MessageCircle, Search } from "react-feather";
+import { Users, MessageCircle, Search, Twitter } from "react-feather";
 
 const MainContainer = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   min-height: 100vh;
   height: 100%;
+  background-color: ${(props) => props.theme.backgroundSecondary};
 `;
 
 const Container = styled.div`
@@ -20,15 +21,47 @@ const Container = styled.div`
 `;
 
 const Wrapper = styled.div`
-  margin: 1.4rem 0;
+  margin: 1.2rem 0;
   color: ${(props) => props.theme.secondary};
   display: flex;
   align-items: center;
 `;
 
 const ImageText = styled.p`
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   margin-left: 0.6rem;
+`;
+
+const Content = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 10rem;
+`;
+
+const StyledTwitter = styled(Twitter)`
+  fill: ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.primary};
+`;
+
+const SignUp = styled.button`
+  width: 100%;
+  height: 1.8rem;
+  border-radius: 9999px;
+  background-color: ${(props) => props.theme.backgroundPrimary};
+  border: 1px solid ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.secondary};
+  margin-bottom: 0.8rem;
+`;
+
+const LogIn = styled.button`
+  width: 100%;
+  height: 1.8rem;
+  border-radius: 9999px;
+  background-color: ${(props) => props.theme.backgroundSecondary};
+  border: 1px solid ${(props) => props.theme.primary};
+  color: ${(props) => props.theme.primary};
 `;
 
 function SignIn() {
@@ -48,7 +81,12 @@ function SignIn() {
           <ImageText>Join the conversation.</ImageText>
         </Wrapper>
       </Container>
-      <div></div>
+      <Content>
+        <StyledTwitter size="2.4rem" />
+        <h1>See what's happening in the world right now</h1>
+        <SignUp>Sign up</SignUp>
+        <LogIn>Log in</LogIn>
+      </Content>
     </MainContainer>
   );
 }

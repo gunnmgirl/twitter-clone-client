@@ -1,7 +1,7 @@
 const lightTheme = {
-  backgroundPrimary: "#121212",
-  backgroundSecondary: "#222222",
-  primary: "#f2f2f2",
+  backgroundPrimary: "rgb(29, 161, 242)", //blue
+  backgroundSecondary: "#f5f8fa", //gray
+  primary: "rgb(29, 161, 242)", //blue
   secondary: "#fff",
 };
 
