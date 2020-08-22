@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Users, MessageCircle, Search, Twitter } from "react-feather";
+import { Modal } from "@malcodeman/react-modal";
 
 const MainContainer = styled.div`
   display: grid;
@@ -64,7 +65,18 @@ const LogIn = styled.button`
   color: ${(props) => props.theme.primary};
 `;
 
+const StyledModal = styled.div`
+  background-color: ${(props) => props.theme.backgroundSecondary};
+  width: 40%;
+  height: 90%;
+  border: 2px solid ${(props) => props.theme.backgroundSecondary};
+  border-radius: 15px;
+`;
+
 function SignIn() {
+  const [isSignUpOpen, setIsSignUpOpen] = React.useState(false);
+  const [isLogInOpen, setIsLogInOpen] = React.useState(false);
+
   return (
     <MainContainer>
       <Container>
@@ -84,8 +96,14 @@ function SignIn() {
       <Content>
         <StyledTwitter size="2.4rem" />
         <h1>See what's happening in the world right now</h1>
-        <SignUp>Sign up</SignUp>
-        <LogIn>Log in</LogIn>
+        <SignUp onClick={() => setIsSignUpOpen(!isSignUpOpen)}>Sign up</SignUp>
+        <Modal isOpen={isSignUpOpen} onClose={() => setIsSignUpOpen(false)}>
+          <StyledModal></StyledModal>
+        </Modal>
+        <LogIn onClick={() => setIsLogInOpen(!isLogInOpen)}>Log in</LogIn>
+        <Modal isOpen={isLogInOpen} onClose={() => setIsLogInOpen(false)}>
+          <StyledModal></StyledModal>
+        </Modal>
       </Content>
     </MainContainer>
   );
