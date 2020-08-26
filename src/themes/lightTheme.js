@@ -3,6 +3,7 @@ const lightTheme = {
   backgroundSecondary: "#f5f8fa", //gray
   primary: "rgb(29, 161, 242)", //blue
   secondary: "#fff",
+  tertiary: "#000",
 };
 
 export default lightTheme;
