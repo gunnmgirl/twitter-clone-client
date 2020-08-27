@@ -46,6 +46,7 @@ const Content = styled.div`
 const StyledTwitter = styled(Twitter)`
   fill: ${(props) => props.theme.primary};
   color: ${(props) => props.theme.primary};
+  align-self: center;
 `;
 
 const SignUp = styled.button`
@@ -68,11 +69,14 @@ const LogIn = styled.button`
 `;
 
 const StyledModal = styled.div`
+  display: flex;
+  flex-direction: column;
   background-color: ${(props) => props.theme.secondary};
   width: 40%;
-  height: 90%;
+  height: 80%;
   border: 2px solid ${(props) => props.theme.backgroundSecondary};
   border-radius: 15px;
+  padding: 0.6rem 0;
 `;
 
 const StyledInput = styled.input`
@@ -83,7 +87,7 @@ const StyledInput = styled.input`
   color: ${(props) => props.theme.tertiary};
   border-radius: 3%;
   font-size: 1rem;
-  margin: 0.2rem 0;
+  margin: 0.4rem 0;
 `;
 
 const StyledForm = styled.form`
@@ -92,6 +96,25 @@ const StyledForm = styled.form`
   padding: 1rem 2rem;
   padding-right: 6rem;
   color: ${(props) => props.theme.primary};
+`;
+
+const WarningText = styled.span`
+  color: ${(props) => props.theme.warning};
+`;
+
+const StyledLabel = styled.label`
+  color: ${(props) => props.theme.quaternary};
+`;
+
+const StyledButton = styled.button`
+  border: 1px solid ${(props) => props.theme.primary};
+  border-radius: 9999px;
+  width: 20%;
+  height: 2rem;
+  color: ${(props) => props.theme.secondary};
+  background-color: ${(props) => props.theme.backgroundPrimary};
+  margin: 1rem 0;
+  font-size: 1rem;
 `;
 
 function SignIn() {
@@ -142,8 +165,9 @@ function SignIn() {
         <SignUp onClick={() => setIsSignUpOpen(!isSignUpOpen)}>Sign up</SignUp>
         <Modal isOpen={isSignUpOpen} onClose={() => setIsSignUpOpen(false)}>
           <StyledModal>
+            <StyledTwitter size="1.8rem" />
             <StyledForm onSubmit={formik.handleSubmit}>
-              <label htmlFor="name">Name</label>
+              <StyledLabel htmlFor="name">Name</StyledLabel>
               <StyledInput
                 type="text"
                 name="name"
@@ -153,9 +177,9 @@ function SignIn() {
                 value={formik.values.name}
               />
               {formik.errors.name && formik.touched.name ? (
-                <span>{formik.errors.name}</span>
+                <WarningText>{formik.errors.name}</WarningText>
               ) : null}
-              <label htmlFor="email">Email</label>
+              <StyledLabel htmlFor="email">Email</StyledLabel>
               <StyledInput
                 type="email"
                 name="email"
@@ -165,9 +189,9 @@ function SignIn() {
                 value={formik.values.email}
               />
               {formik.errors.email && formik.touched.email ? (
-                <span>{formik.errors.email}</span>
+                <WarningText>{formik.errors.email}</WarningText>
               ) : null}
-              <label htmlFor="password">Password</label>
+              <StyledLabel htmlFor="password">Password</StyledLabel>
               <StyledInput
                 type="password"
                 name="password"
@@ -177,8 +201,9 @@ function SignIn() {
                 value={formik.values.password}
               />
               {formik.errors.password && formik.touched.password ? (
-                <span>{formik.errors.password}</span>
+                <WarningText>{formik.errors.password}</WarningText>
               ) : null}
+              <StyledButton onClick={formik.handleSubmit}>Submit</StyledButton>
             </StyledForm>
           </StyledModal>
         </Modal>
