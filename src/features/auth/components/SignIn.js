@@ -109,7 +109,7 @@ const StyledLabel = styled.label`
 const StyledButton = styled.button`
   border: 1px solid ${(props) => props.theme.primary};
   border-radius: 9999px;
-  width: 20%;
+  width: 5rem;
   height: 2rem;
   color: ${(props) => props.theme.secondary};
   background-color: ${(props) => props.theme.backgroundPrimary};

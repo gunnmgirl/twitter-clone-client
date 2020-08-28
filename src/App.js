@@ -5,7 +5,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import GlobalStyle from "./GlobalStyle";
 import hooks from "./hooks";
 import themes from "./themes";
-import SignIn from "./features/signIn/components/SignIn";
+import SignIn from "./features/auth/components/SignIn";
 import Posts from "./features/posts/components/Posts";
 import User from "./features/user/components/User";
 
