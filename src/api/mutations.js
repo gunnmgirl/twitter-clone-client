@@ -1,11 +1,11 @@
 import axios from "../http";
 
-function signUp(payload) {
+function signup(payload) {
   return axios.put("/auth/signup", payload);
 }
 
 export default {
-  signUp,
+  signup,
 };
 
-export { signUp };
+export { signup };

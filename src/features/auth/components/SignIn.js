@@ -4,6 +4,7 @@ import { Users, MessageCircle, Search, Twitter } from "react-feather";
 import { Modal } from "@malcodeman/react-modal";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+import { useHistory } from "react-router-dom";
 
 const MainContainer = styled.div`
   display: grid;
@@ -118,8 +119,8 @@ const StyledButton = styled.button`
 `;
 
 function SignIn() {
-  const [isSignUpOpen, setIsSignUpOpen] = React.useState(false);
-  const [isLogInOpen, setIsLogInOpen] = React.useState(false);
+  const [isOpen, setIsOpen] = React.useState(false);
+  const history = useHistory();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -138,7 +139,8 @@ function SignIn() {
       password: "",
     },
     onSubmit: (values) => {
-      console.log("values: ", values);
+      setIsOpen(false);
+      history.push("/login");
     },
     validationSchema,
   });
@@ -162,8 +164,8 @@ function SignIn() {
       <Content>
         <StyledTwitter size="2.4rem" />
         <h1>See what's happening in the world right now</h1>
-        <SignUp onClick={() => setIsSignUpOpen(!isSignUpOpen)}>Sign up</SignUp>
-        <Modal isOpen={isSignUpOpen} onClose={() => setIsSignUpOpen(false)}>
+        <SignUp onClick={() => setIsOpen(!isOpen)}>Sign up</SignUp>
+        <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
           <StyledModal>
             <StyledTwitter size="1.8rem" />
             <StyledForm onSubmit={formik.handleSubmit}>
@@ -203,14 +205,13 @@ function SignIn() {
               {formik.errors.password && formik.touched.password ? (
                 <WarningText>{formik.errors.password}</WarningText>
               ) : null}
-              <StyledButton onClick={formik.handleSubmit}>Submit</StyledButton>
+              <StyledButton type="submit" onClick={formik.handleSubmit}>
+                Submit
+              </StyledButton>
             </StyledForm>
           </StyledModal>
         </Modal>
-        <LogIn onClick={() => setIsLogInOpen(!isLogInOpen)}>Log in</LogIn>
-        <Modal isOpen={isLogInOpen} onClose={() => setIsLogInOpen(false)}>
-          <StyledModal></StyledModal>
-        </Modal>
+        <LogIn onClick={() => history.push("/login")}>Log in</LogIn>
       </Content>
     </MainContainer>
   );
