@@ -5,13 +5,25 @@ const INITIAL_STATE = {
 };
 
 export default (state = INITIAL_STATE, action) => {
-  console.log("akcija u reduceru ", action);
+  console.log("reducer action ", action);
   switch (action.type) {
     case "SIGNUP_REQUEST":
       return {
         ...state,
         loading: true,
         error: false,
+      };
+    case "LOGIN_REQUEST":
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    case "LOGIN_FAILURE":
+      return {
+        ...state,
+        loading: false,
+        error: true,
       };
     default:
       return state;
