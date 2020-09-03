@@ -8,9 +8,14 @@ function login(payload) {
   return axios.post("/auth/login", payload);
 }
 
+function createPost(payload) {
+  return axios.put("/posts/create", payload);
+}
+
 export default {
   signup,
   login,
+  createPost,
 };
 
 export { signup, login };
