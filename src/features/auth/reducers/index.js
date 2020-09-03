@@ -1,5 +1,5 @@
 const INITIAL_STATE = {
-  posts: [],
+  isLoggedIn: false,
   loading: false,
   error: false,
 };
@@ -24,6 +24,13 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         error: true,
+      };
+    case "LOGIN_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        error: false,
+        isLoggedIn: true,
       };
     default:
       return state;

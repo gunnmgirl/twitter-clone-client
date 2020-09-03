@@ -1,6 +1,7 @@
 import { call, put, takeLatest } from "redux-saga/effects";
 
 import mutations from "../../../api/mutations";
+import history from "../../../routing/history";
 
 function* signup(action) {
   try {
@@ -17,12 +18,14 @@ function* login(action) {
   try {
     const data = yield call(mutations.login, action.payload);
     const result = data.data;
-    yield put({ type: "LOGIN_SUCCESS", payload: result });
+    localStorage.setItem("token", result.token);
+    formik.setSubmitting(false);
+    history.push("/");
+    yield put({ type: "LOGIN_SUCCESS", payload: result.userId });
   } catch (error) {
     formik.setFieldError("password", error.data);
-    yield put({ type: "LOGIN_FAILURE", error });
-  } finally {
     formik.setSubmitting(false);
+    yield put({ type: "LOGIN_FAILURE", error });
   }
 }
 
