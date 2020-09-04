@@ -1,6 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { ThumbsUp, ThumbsDown } from "react-feather";
+import { useDispatch } from "react-redux";
+
+import { deletePost } from "../actions";
 
 const Container = styled.div`
   border: 0.1rem solid ${(props) => props.theme.primary};
@@ -53,9 +56,16 @@ const Content = styled.div`
 
 function Post(props) {
   const { post } = props;
+  const dispatch = useDispatch();
 
   return (
     <Container>
+      <Wrapper>
+        <button onClick={() => dispatch(deletePost({ postId: post._id }))}>
+          Delete
+        </button>
+        <button>Edit</button>
+      </Wrapper>
       <Content>
         <StyledText>{post.content}</StyledText>
       </Content>

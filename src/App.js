@@ -1,6 +1,7 @@
 import React from "react";
 import { ThemeProvider } from "styled-components";
 import { Router, Switch, Route } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 import GlobalStyle from "./GlobalStyle";
 import hooks from "./hooks";
@@ -13,7 +14,7 @@ import LogIn from "./features/auth/components/LogIn";
 function App() {
   const dark = hooks.usePreferredTheme();
   const theme = dark ? themes.dark : themes.light;
-  const isLoggedIn = localStorage.getItem("token") ? true : false;
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
 
   return (
     <ThemeProvider theme={theme}>

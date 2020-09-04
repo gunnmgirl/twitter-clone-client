@@ -12,3 +12,10 @@ export const getPosts = (payload) => {
     payload,
   };
 };
+
+export const deletePost = (payload) => {
+  return {
+    type: "DELETE_POST_REQUEST",
+    payload,
+  };
+};

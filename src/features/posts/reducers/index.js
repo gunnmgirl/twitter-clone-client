@@ -13,6 +13,24 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
   console.log("reducer ", action);
   switch (action.type) {
+    case "DELETE_POST_REQUEST":
+      return {
+        ...state,
+        loading: true,
+        error: false,
+      };
+    case "DELETE_POST_SUCCESS":
+      return {
+        ...state,
+        loading: false,
+        error: false,
+      };
+    case "DELETE_POST_FAILURE":
+      return {
+        ...state,
+        loading: false,
+        error: true,
+      };
     case "GET_POSTS_REQUEST":
       return {
         ...state,

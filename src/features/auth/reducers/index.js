@@ -40,6 +40,12 @@ export default (state = INITIAL_STATE, action) => {
         ...state,
         loading: false,
         error: false,
+        isLoggedIn: true,
+      };
+    case "LOGOUT":
+      return {
+        ...state,
+        isLoggedIn: false,
       };
     default:
       return state;

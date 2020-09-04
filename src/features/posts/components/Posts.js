@@ -5,6 +5,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 import { createPost, getPosts } from "../actions";
+import { logout } from "../../auth/actions";
 import Post from "./Post";
 
 const MainContainer = styled.div`
@@ -106,6 +107,14 @@ function Posts() {
           ))}
         </PostsWrapper>
       </Container>
+      <StyledButton
+        onClick={() => {
+          dispatch(logout());
+          localStorage.removeItem("token");
+        }}
+      >
+        Log out
+      </StyledButton>
     </MainContainer>
   );
 }
