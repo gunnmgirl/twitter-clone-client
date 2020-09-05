@@ -2,8 +2,53 @@ import React from "react";
 import styled from "styled-components";
 import { ThumbsUp, ThumbsDown } from "react-feather";
 import { useDispatch } from "react-redux";
+import { Modal } from "@malcodeman/react-modal";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
-import { deletePost } from "../actions";
+import { deletePost, editPost } from "../actions";
+
+const StyledModal = styled.div`
+  display: flex;
+  flex-direction: column;
+  background-color: ${(props) => props.theme.secondary};
+  width: 40%;
+  height: 40%;
+  border: 2px solid ${(props) => props.theme.backgroundSecondary};
+  border-radius: 15px;
+  padding: 0.6rem 0;
+`;
+
+const StyledTextarea = styled.textarea`
+  resize: none;
+  width: auto;
+  height: 5rem;
+  border: 0.03rem solid ${(props) => props.theme.primary};
+  background-color: ${(props) => props.theme.backgroundSecondary};
+  color: ${(props) => props.theme.tertiary};
+  border-radius: 3%;
+  font-size: 1rem;
+  margin: 0.4rem 0;
+`;
+
+const StyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem;
+  padding-right: 6rem;
+  color: ${(props) => props.theme.primary};
+`;
+
+const StyledButton = styled.button`
+  border: 1px solid ${(props) => props.theme.primary};
+  border-radius: 9999px;
+  width: 5rem;
+  height: 2rem;
+  color: ${(props) => props.theme.secondary};
+  background-color: ${(props) => props.theme.backgroundPrimary};
+  margin: 1rem 0;
+  font-size: 1rem;
+`;
 
 const Container = styled.div`
   border: 0.1rem solid ${(props) => props.theme.primary};
@@ -55,8 +100,24 @@ const Content = styled.div`
 `;
 
 function Post(props) {
+  const [isOpen, setIsOpen] = React.useState(false);
   const { post } = props;
   const dispatch = useDispatch();
+
+  const validationSchema = Yup.object().shape({
+    content: Yup.string().required(),
+  });
+
+  const formik = useFormik({
+    initialValues: {
+      content: post.content,
+    },
+    onSubmit: (values) => {
+      dispatch(editPost({ postId: post._id, newContent: values.content }));
+      setIsOpen(false);
+    },
+    validationSchema,
+  });
 
   return (
     <Container>
@@ -64,8 +125,24 @@ function Post(props) {
         <button onClick={() => dispatch(deletePost({ postId: post._id }))}>
           Delete
         </button>
-        <button>Edit</button>
+        <button onClick={() => setIsOpen(true)}>Edit</button>
       </Wrapper>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <StyledModal>
+          <StyledForm onSubmit={formik.handleSubmit}>
+            <StyledTextarea
+              type="text"
+              name="content"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.content}
+            />
+            <StyledButton type="submit" onClick={formik.handleSubmit}>
+              Edit
+            </StyledButton>
+          </StyledForm>
+        </StyledModal>
+      </Modal>
       <Content>
         <StyledText>{post.content}</StyledText>
       </Content>

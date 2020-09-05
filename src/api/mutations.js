@@ -12,6 +12,10 @@ function deletePost(payload) {
   return axios.post("/posts/delete", payload);
 }
 
+function editPost(payload) {
+  return axios.post("/posts/edit", payload);
+}
+
 function createPost(payload) {
   return axios.put("/posts/create", payload);
 }
@@ -21,6 +25,7 @@ export default {
   login,
   createPost,
   deletePost,
+  editPost,
 };
 
-export { signup, login };
+export { signup, login, createPost, deletePost, editPost };

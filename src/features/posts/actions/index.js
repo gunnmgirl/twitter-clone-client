@@ -19,3 +19,10 @@ export const deletePost = (payload) => {
     payload,
   };
 };
+
+export const editPost = (payload) => {
+  return {
+    type: "EDIT_POST_REQUEST",
+    payload,
+  };
+};

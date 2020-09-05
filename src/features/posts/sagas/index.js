@@ -5,8 +5,6 @@ import queries from "../../../api/queries";
 
 function* createPost(action) {
   const { formik } = action.meta;
-  console.log("saga action ", action);
-
   try {
     const data = yield call(mutations.createPost, action.payload);
     const result = data.data;
@@ -19,13 +17,22 @@ function* createPost(action) {
 }
 
 function* deletePost(action) {
-  console.log("saga action ", action);
   try {
     const data = yield call(mutations.deletePost, action.payload);
     const result = data.data;
     yield put({ type: "DELETE_POST_SUCCESS", payload: result });
   } catch (error) {
     yield put({ type: "DELETE_POST_FAILURE", error });
+  }
+}
+
+function* editPost(action) {
+  try {
+    const data = yield call(mutations.editPost, action.payload);
+    const result = data.data;
+    yield put({ type: "EDIT_POST_SUCCESS", payload: result });
+  } catch (error) {
+    yield put({ type: "EDIT_POST_FAILURE", error });
   }
 }
 
@@ -43,6 +50,7 @@ const saga = function* () {
   yield takeLatest("CREATE_POST_REQUEST", createPost);
   yield takeLatest("GET_POSTS_REQUEST", getPosts);
   yield takeLatest("DELETE_POST_REQUEST", deletePost);
+  yield takeLatest("EDIT_POST_REQUEST", editPost);
 };
 
 export default saga;
